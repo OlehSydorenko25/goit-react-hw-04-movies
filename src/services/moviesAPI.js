@@ -54,7 +54,6 @@ async function reviewsDetails(movieId) {
     const reviews = await axios.get(
       `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${APIKey}`,
     );
-    // console.log(reviews.data.results);
     return reviews.data.results;
   } catch (error) {
     console.error(error.message);

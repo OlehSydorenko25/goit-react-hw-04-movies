@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import styles from './SearchForm.module.css';
 
 class SearchForm extends Component {
@@ -14,12 +15,20 @@ class SearchForm extends Component {
 
   handleSubmin = e => {
     e.preventDefault();
+    const { query } = this.state;
 
     this.props.onSubmit(this.state.query);
+    // console.log(this.props);
 
-    this.setState({
-      query: '',
+    this.props.history.push({
+      pathname: this.props.history.location.pathname,
+      search: `q=${query}`,
+      key: this.props.history.location.key,
     });
+
+    // this.props.history.push({ ...this.props.history.location });
+
+    this.setState({ query: '' });
   };
 
   render() {
@@ -46,4 +55,4 @@ class SearchForm extends Component {
   }
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);

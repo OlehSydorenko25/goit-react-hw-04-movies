@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MovieImagePreview from '../MovieImage/MovieImagePreview';
 import styles from './MovieList.module.css';
 
-const MovieList = ({ movies, match, location }) => {
+const MovieList = ({ movies, location, query }) => {
   return (
     <ul className={styles.Movies_List}>
       {movies.map(({ id, poster_path, title, release_date, vote_average }) => {
@@ -13,9 +13,11 @@ const MovieList = ({ movies, match, location }) => {
             <NavLink
               to={{
                 pathname: `/movies/${id}`,
-                state: { from: location },
+                state: {
+                  from: location,
+                  query,
+                },
               }}
-              // to={`${match.url}/${id}`}
             >
               <MovieImagePreview
                 poster_path={poster_path}
@@ -37,7 +39,7 @@ MovieList.propTypes = {
       id: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  //   location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default withRouter(MovieList);

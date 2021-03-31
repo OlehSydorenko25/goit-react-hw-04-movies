@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { searchMovies } from '../services/moviesAPI';
 import SearchForm from '../components/SearchForm/SearchForm';
 import MovieList from '../components/MovieList/MovieList';
@@ -23,14 +24,14 @@ class MoviesPage extends Component {
   };
 
   render() {
-    // console.log(this.props.match.url);
+    console.log(this.props.location.search);
     return (
       <>
         <SearchForm onSubmit={this.handleChangeQuery} />
-        <MovieList movies={this.state.movies} />
+        <MovieList movies={this.state.movies} query={this.state.query} />
       </>
     );
   }
 }
 
-export default MoviesPage;
+export default withRouter(MoviesPage);

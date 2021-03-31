@@ -14,17 +14,15 @@ class Reviews extends Component {
 
   render() {
     const { reviews } = this.state;
-
     return (
       <ul>
-        {reviews < 0 ? (
+        {reviews.length > 0 ? (
           reviews.map(({ id, content }) => {
             return <li key={id}>{content}</li>;
           })
         ) : (
           <div>We don't have any reviews for this movie</div>
         )}
-        {}
       </ul>
     );
   }

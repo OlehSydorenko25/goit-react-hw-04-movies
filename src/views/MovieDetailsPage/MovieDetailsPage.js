@@ -3,14 +3,14 @@ import { Route, NavLink } from 'react-router-dom';
 import { movieDetails } from '../../services/moviesAPI';
 import styles from './MoiveDetailspage.module.css';
 import defaultImg from './default-image.jpg';
-// import Cast from '../Cast/Cast';
-// import Reviews from '../Reviews/Reviews';
-import routes from '../../routes';
+// import routes from '../../routes';
 
-const Cast = lazy(() => import('../Cast/Cast' /* webpackChunkName: "cast" */));
+const Cast = lazy(() =>
+  import('../../components/Cast/Cast' /* webpackChunkName: "cast" */),
+);
 
 const Reviews = lazy(() =>
-  import('../Reviews/Reviews' /* webpackChunkName: "reviews" */),
+  import('../../components/Reviews/Reviews' /* webpackChunkName: "reviews" */),
 );
 
 class MovieDetailsPage extends Component {
@@ -29,11 +29,17 @@ class MovieDetailsPage extends Component {
   }
 
   handleGoBack = () => {
-    const { location, history } = this.props;
-    if (location.state && location.state.from) {
-      return history.push(location.state.from);
-    }
-    history.push(routes.home);
+    // const { location, history } = this.props;
+    // if (location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+    // history.push(routes.home);
+    // console.log(this.props.location.state);
+
+    this.props.history.push({
+      pathname: `${this.props.location.state.from.pathname}` || '/',
+      search: `q=${this.props.location.state.query}`,
+    });
   };
 
   render() {
