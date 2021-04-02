@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { searchMovies } from '../services/moviesAPI';
 import SearchForm from '../components/SearchForm/SearchForm';
 import MovieList from '../components/MovieList/MovieList';
@@ -9,6 +8,15 @@ class MoviesPage extends Component {
     movies: [],
     query: '',
   };
+
+  componentDidMount() {
+    const searchQuery = this.props.location.search;
+    const query = searchQuery.slice(3);
+
+    if (query) {
+      this.setState({ query: query });
+    }
+  }
 
   async componentDidUpdate(prevProps, prevState) {
     const { query } = this.state;
@@ -24,14 +32,17 @@ class MoviesPage extends Component {
   };
 
   render() {
-    console.log(this.props.location.search);
     return (
       <>
         <SearchForm onSubmit={this.handleChangeQuery} />
-        <MovieList movies={this.state.movies} query={this.state.query} />
+        <MovieList
+          movies={this.state.movies}
+          query={this.state.query}
+          location={this.props.location}
+        />
       </>
     );
   }
 }
 
-export default withRouter(MoviesPage);
+export default MoviesPage;

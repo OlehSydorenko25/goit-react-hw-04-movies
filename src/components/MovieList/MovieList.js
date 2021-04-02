@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieImagePreview from '../MovieImage/MovieImagePreview';
 import styles from './MovieList.module.css';
@@ -15,7 +15,6 @@ const MovieList = ({ movies, location, query }) => {
                 pathname: `/movies/${id}`,
                 state: {
                   from: location,
-                  query,
                 },
               }}
             >
@@ -39,7 +38,6 @@ MovieList.propTypes = {
       id: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  location: PropTypes.object.isRequired,
 };
 
-export default withRouter(MovieList);
+export default MovieList;

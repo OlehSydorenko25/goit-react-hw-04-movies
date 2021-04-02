@@ -25,7 +25,10 @@ const App = () => (
       <Switch>
         <Route path={routes.home} exact component={HomePage} />
         <Route path={routes.moviesDetails} component={MovieDetailsPage} />
-        <Route path={routes.movies} component={MoviesPage} />
+        <Route
+          path={routes.movies}
+          render={props => <MoviesPage {...props} />}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </Suspense>
